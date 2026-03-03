@@ -1,0 +1,27 @@
+version: "1.0-stable"
+metadata:
+  name: "vgpu-sustainment-agent-amd"
+  cli_mode: "autonomous-drift"
+  target_hardware: "AMD Instinct MI300X"
+  status: "ready"
+
+runtime_params:
+  jitter_buffer_size: 30
+  sampling_rate: 30Hz
+  memory_budget: 90MB
+  mtu_lock: 1420
+
+roc m_config:
+  compute_units: 304  # MI300X has 304 CUs
+  memory: 192GB HBM3
+  hip_version: "6.0"
+  optimization_flags:
+    - "-O3"
+    - "--fast-math"
+    - "-ffast-math"
+
+network_layer:
+  interface: "wg0"
+  port: 5555
+  protocol: "UDP-Stateless"
+  packet_format: "binary"
