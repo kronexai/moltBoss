@@ -1,0 +1,15 @@
+tasks:
+  - name: VGPU Environment
+    init: |
+      pip install numpy pyyaml
+      echo "VGPU environment ready"
+    command: |
+      python3 vgpu_agent.py
+
+ports:
+  - port: 5555
+    visibility: public
+    protocol: udp
+
+image:
+  file: .gitpod.Dockerfile
